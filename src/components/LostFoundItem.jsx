@@ -19,7 +19,10 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
         <div className="row align-items-center">
           <div className="col-8 d-flex">
             <h5>
-              <Link to={`/lostfounds/${lostfound.id}`} className="text-primary">
+              <Link
+                to={`/lost-founds/${lostfound.id}`}
+                className="text-primary"
+              >
                 {lostfound.title}
               </Link>
             </h5>
@@ -71,12 +74,11 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
 const lostFoundItemShape = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  is_finished: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
+  is_completed: PropTypes.number.isRequired,
   cover: PropTypes.string,
   created_at: PropTypes.string.isRequired,
   updated_at: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-  is_completed: PropTypes.number.isRequired,
 };
 
 LostFoundItem.propTypes = {
