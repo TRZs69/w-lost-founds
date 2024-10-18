@@ -10,7 +10,7 @@ function Navigation({ authLogin, onAuthSignOut }) {
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Todo App
+            Lost & Found App
           </Link>
           <button
             className="navbar-toggler"
@@ -28,9 +28,9 @@ function Navigation({ authLogin, onAuthSignOut }) {
               <li className="mt-2">
                 <Link
                   className="btn btn-light btn-sm text-dark"
-                  to="/todos/add"
+                  to="/lost-founds/add"
                 >
-                  <FaPlus /> Buat Todo
+                  <FaPlus /> Add Lost & Found
                 </Link>
               </li>
               <li className="nav-item dropdown">

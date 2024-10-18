@@ -10,8 +10,8 @@ import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
-import TodoAddPage from "./pages/TodoAddPage";
-import TodoDetailPage from "./pages/TodoDetailPage";
+import LostFoundAddPage from "./pages/LostFoundAddPage";
+import LostFoundDetailPage from "./pages/LostFoundDetailPage";
 
 function App() {
   const { authLogin = null, isPreload = false } = useSelector(
@@ -83,8 +83,8 @@ function App() {
             <Route path="/*" element={<NotFoundPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/users/me" element={<ProfilePage />} />
-            <Route path="/todos/:id" element={<TodoDetailPage />} />
-            <Route path="/todos/add" element={<TodoAddPage />} />
+            <Route path="/lost-founds/:id" element={<LostFoundDetailPage />} />
+            <Route path="/lost-founds/add" element={<LostFoundAddPage />} />
           </Routes>
         </main>
       </div>

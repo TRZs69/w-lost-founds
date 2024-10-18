@@ -1,14 +1,14 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-function TodoInput({ onAddTodo }) {
+function LostFoundInput({ onAddLostFound }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  function handleOnAddTodo(e) {
-    e.preventDefault(); // Mencegah refresh halaman
+  function handleOnAddLostFound(e) {
+    e.preventDefault(); // Prevent page refresh
     if (title.trim() && description.trim()) {
-      onAddTodo({ title, description });
+      onAddLostFound({ title, description });
     }
   }
 
@@ -27,9 +27,9 @@ function TodoInput({ onAddTodo }) {
   return (
     <div className="card">
       <div className="card-body">
-        <h3 className="ps-2">Buat Todo</h3>
+        <h3 className="ps-2">Add Lost & Found</h3>
         <hr />
-        <form onSubmit={handleOnAddTodo}>
+        <form onSubmit={handleOnAddLostFound}>
           <div className="mb-3">
             <label htmlFor="inputTitle" className="form-label">
               Judul
@@ -72,8 +72,8 @@ function TodoInput({ onAddTodo }) {
   );
 }
 
-TodoInput.propTypes = {
-  onAddTodo: PropTypes.func.isRequired,
+LostFoundInput.propTypes = {
+  onAddLostFound: PropTypes.func.isRequired,
 };
 
-export default TodoInput;
+export default LostFoundInput;

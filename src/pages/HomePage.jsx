@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import TodoList from "../components/TodoList";
+import LostFoundList from "../components/LostFoundList";
 import {
-  asyncGetTodos,
-  asyncDeleteTodo,
-  deleteTodoActionCreator,
-} from "../states/todos/action";
+  asyncGetLostFounds,
+  asyncDeleteLostFound,
+  deleteLostFoundActionCreator,
+} from "../states/lostfounds/action";
 
 function HomePage() {
-  const { todos = [], isDeleteTodo = false } = useSelector((states) => states);
+  const { lostfounds = [], isDeleteLostFound = false } = useSelector(
+    (states) => states
+  );
 
   const queryParams = new URLSearchParams(location.search);
   const is_finished = queryParams.get("is_finished") || "";
@@ -16,28 +18,31 @@ function HomePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isDeleteTodo) {
+    if (isDeleteLostFound) {
       // eslint-disable-next-line no-undef
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Todo berhasil dihapus!",
+        title: "LostFound berhasil dihapus!",
         showConfirmButton: false,
         timer: 700,
       });
-      dispatch(deleteTodoActionCreator(false));
+      dispatch(deleteLostFoundActionCreator(false));
     }
-    dispatch(asyncGetTodos(is_finished));
-  }, [dispatch, isDeleteTodo, is_finished]);
+    dispatch(asyncGetLostFounds(is_finished));
+  }, [dispatch, isDeleteLostFound, is_finished]);
 
-  const onDeleteTodo = (id) => {
-    dispatch(asyncDeleteTodo(id));
+  const onDeleteLostFound = (id) => {
+    dispatch(asyncDeleteLostFound(id));
   };
 
   return (
     <section>
       <div className="container pt-1">
-        <TodoList todos={todos} onDeleteTodo={onDeleteTodo}></TodoList>
+        <LostFoundList
+          lostfounds={lostfounds}
+          onDeleteLostFound={onDeleteLostFound}
+        ></LostFoundList>
       </div>
     </section>
   );

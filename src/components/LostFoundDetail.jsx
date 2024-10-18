@@ -1,41 +1,41 @@
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import { todoItemShape } from "./TodoItem";
+import { lostFoundItemShape } from "./LostFoundItem"; // Change import to reflect the new item
 import { postedAt } from "../utils/tools";
 import { FaClock, FaPenToSquare, FaUpload } from "react-icons/fa6";
 import api from "../utils/api";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncDetailTodo } from "../states/todos/action";
+import { asyncDetailLostFound } from "../states/lostfounds/action"; // Updated action
 import { useParams } from "react-router-dom";
 
-function TodoDetail({ todo, onEditTodo }) {
+function LostFoundDetail({ lostfound, onEditLostFound }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(todo?.title || "");
+  const [editedTitle, setEditedTitle] = useState(lostfound?.title || "");
   const [editedDescription, setEditedDescription] = useState(
-    todo?.description || ""
+    lostfound?.description || ""
   );
-  const [editedStatus, setEditedStatus] = useState(todo?.is_finished || 0);
-  const [previewCover, setPreviewCover] = useState(todo?.cover || null); // Default to existing cover
+  const [editedStatus, setEditedStatus] = useState(lostfound?.is_finished || 0);
+  const [previewCover, setPreviewCover] = useState(lostfound?.cover || null);
   const [isUploading, setIsUploading] = useState(false);
 
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (id) {
-      dispatch(asyncDetailTodo(id)); // Fetch the current todo details
+      dispatch(asyncDetailLostFound(id)); // Fetch the current lostfound details
     }
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (todo) {
-      setEditedTitle(todo.title);
-      setEditedDescription(todo.description);
-      setEditedStatus(todo.is_finished);
-      setPreviewCover(todo.cover); // Set the existing cover if available
+    if (lostfound) {
+      setEditedTitle(lostfound.title);
+      setEditedDescription(lostfound.description);
+      setEditedStatus(lostfound.is_finished);
+      setPreviewCover(lostfound.cover); // Set the existing cover if available
     }
-  }, [todo]);
+  }, [lostfound]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -50,11 +50,11 @@ function TodoDetail({ todo, onEditTodo }) {
     setIsUploading(true);
     try {
       const message = await api.postChangeCoverTodo({
-        id: todo.id,
+        id: lostfound.id,
         cover: file,
       });
       console.log("Cover updated:", message);
-      dispatch(asyncDetailTodo(todo.id)); // Refresh the todo after upload
+      dispatch(asyncDetailLostFound(lostfound.id)); // Refresh the lostfound after upload
     } catch (error) {
       console.error("Failed to upload cover:", error.message);
     }
@@ -66,14 +66,14 @@ function TodoDetail({ todo, onEditTodo }) {
   };
 
   const handleSaveChanges = () => {
-    onEditTodo(todo.id, editedTitle, editedDescription, editedStatus);
+    onEditLostFound(lostfound.id, editedTitle, editedDescription, editedStatus);
     setIsEditing(false);
   };
 
-  let badgeStatus = todo.is_finished
+  let badgeStatus = lostfound.is_finished
     ? "badge bg-success text-white ms-3"
     : "badge bg-warning text-dark ms-3";
-  let badgeLabel = todo.is_finished ? "Selesai" : "Belum Selesai";
+  let badgeLabel = lostfound.is_finished ? "Selesai" : "Belum Selesai";
 
   return (
     <div className="card mt-3">
@@ -109,12 +109,12 @@ function TodoDetail({ todo, onEditTodo }) {
           )}
         </div>
 
-        {/* Todo Details */}
+        {/* Lost Found Details */}
         <div className="row align-items-center">
           <div className="col-12">
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">
-                <h5 className="mb-0">{todo.title}</h5>
+                <h5 className="mb-0">{lostfound.title}</h5>
                 <span className={`${badgeStatus} ms-2`}>{badgeLabel}</span>
               </div>
 
@@ -149,7 +149,7 @@ function TodoDetail({ todo, onEditTodo }) {
             <div className="col-12">
               <div className="text-sm op-5">
                 <FaClock />
-                <span className="ps-2">{postedAt(todo.created_at)}</span>
+                <span className="ps-2">{postedAt(lostfound.created_at)}</span>
               </div>
             </div>
 
@@ -208,7 +208,7 @@ function TodoDetail({ todo, onEditTodo }) {
                   </div>
                 </div>
               ) : (
-                <div>{todo.description}</div>
+                <div>{lostfound.description}</div>
               )}
             </div>
           </div>
@@ -218,9 +218,9 @@ function TodoDetail({ todo, onEditTodo }) {
   );
 }
 
-TodoDetail.propTypes = {
-  todo: PropTypes.shape(todoItemShape).isRequired,
-  onEditTodo: PropTypes.func.isRequired,
+LostFoundDetail.propTypes = {
+  lostfound: PropTypes.shape(lostFoundItemShape).isRequired,
+  onEditLostFound: PropTypes.func.isRequired,
 };
 
-export default TodoDetail;
+export default LostFoundDetail;

@@ -5,12 +5,12 @@ import isPreloadReducer from "./isPreload/reducer";
 import isAuthRegisterReducer from "./isAuthRegister/reducer";
 import isUserChangePhotoReducer from "./isUserChangePhoto/reducer";
 import {
-  todosReducer,
-  isAddTodoReducer,
-  isDeleteTodoReducer,
-  isEditTodoReducer,
-  detailTodoReducer,
-} from "./todos/reducer";
+  lostfoundsReducer,
+  isAddLostFoundReducer,
+  isDeleteLostFoundReducer,
+  isEditLostFoundReducer,
+  detailLostFoundReducer,
+} from "./lostfounds/reducer"; // Adjust the import path according to your folder structure
 
 const store = configureStore({
   reducer: {
@@ -23,12 +23,12 @@ const store = configureStore({
     // Profile
     isUserChangePhoto: isUserChangePhotoReducer,
 
-    // Todo
-    todos: todosReducer,
-    isAddTodo: isAddTodoReducer,
-    isDeleteTodo: isDeleteTodoReducer,
-    isEditTodo: isEditTodoReducer,
-    detailTodo: detailTodoReducer,
+    // Lost and Found
+    lostFounds: lostfoundsReducer, // Changed from todos to lostFounds
+    isAddLostFound: isAddLostFoundReducer, // Changed from isAddTodo
+    isDeleteLostFound: isDeleteLostFoundReducer, // Changed from isDeleteTodo
+    isEditLostFound: isEditLostFoundReducer, // Changed from isEditTodo
+    detailLostFound: detailLostFoundReducer, // Changed from detailTodo
   },
 });
 

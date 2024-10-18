@@ -1,5 +1,6 @@
 const api = (() => {
   const BASE_URL = "https://public-api.delcom.org/api/v1";
+
   async function _fetchWithAuth(url, options = {}) {
     return fetch(url, {
       ...options,
@@ -9,9 +10,11 @@ const api = (() => {
       },
     });
   }
+
   function putAccessToken(token) {
     localStorage.setItem("accessToken", token);
   }
+
   function getAccessToken() {
     return localStorage.getItem("accessToken");
   }
@@ -88,9 +91,9 @@ const api = (() => {
     return message;
   }
 
-  // API Todos => https://public-api.delcom.org/docs/1.0/apitodos
-  async function postAddTodo({ title, description }) {
-    const response = await _fetchWithAuth(`${BASE_URL}/todos`, {
+  // API LostFounds => https://public-api.delcom.org/docs/1.0/apilostfounds
+  async function postAddLostFound({ title, description }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/lost-founds`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,18 +109,21 @@ const api = (() => {
       throw new Error(message);
     }
     const {
-      data: { todo_id },
+      data: { lostfound_id },
     } = responseJson;
-    return todo_id;
+    return lostfound_id;
   }
 
-  async function postChangeCoverTodo({ id, cover }) {
+  async function postChangeCoverLostFound({ id, cover }) {
     const formData = new FormData();
     formData.append("cover", cover);
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}/cover`, {
-      method: "POST",
-      body: formData,
-    });
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/lost-founds/${id}/cover`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const responseJson = await response.json();
     const { success, message } = responseJson;
     if (success !== true) {
@@ -126,10 +132,10 @@ const api = (() => {
     return message;
   }
 
-  async function putUpdateTodo({ id, title, description, is_finished }) {
-    console.log("Updating todo:", { id, title, description, is_finished });
+  async function putUpdateLostFound({ id, title, description, is_finished }) {
+    console.log("Updating lostfound:", { id, title, description, is_finished });
 
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}`, {
+    const response = await _fetchWithAuth(`${BASE_URL}/lost-founds/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -152,8 +158,8 @@ const api = (() => {
     return message;
   }
 
-  async function deleteTodo(id) {
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}`, {
+  async function deleteLostFound(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/lost-founds/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -167,9 +173,9 @@ const api = (() => {
     return message;
   }
 
-  async function getAllTodos(is_finished) {
+  async function getAllLostFounds(is_finished) {
     const response = await _fetchWithAuth(
-      `${BASE_URL}/todos?is_finished=${is_finished}`
+      `${BASE_URL}/lost-founds?is_finished=${is_finished}`
     );
     const responseJson = await response.json();
 
@@ -178,22 +184,22 @@ const api = (() => {
       throw new Error(message);
     }
     const {
-      data: { todos },
+      data: { lostfounds },
     } = responseJson;
-    return todos;
+    return lostfounds;
   }
 
-  async function getDetailTodo(id) {
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}`);
+  async function getDetailLostFound(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/lost-founds/${id}`);
     const responseJson = await response.json();
     const { success, message } = responseJson;
     if (success !== true) {
       throw new Error(message);
     }
     const {
-      data: { todo },
+      data: { lostfound },
     } = responseJson;
-    return todo;
+    return lostfound;
   }
 
   return {
@@ -203,12 +209,12 @@ const api = (() => {
     postAuthLogin,
     getMe,
     postChangePhotoProfile,
-    postAddTodo,
-    postChangeCoverTodo,
-    putUpdateTodo,
-    deleteTodo,
-    getAllTodos,
-    getDetailTodo,
+    postAddLostFound,
+    postChangeCoverLostFound,
+    putUpdateLostFound,
+    deleteLostFound,
+    getAllLostFounds,
+    getDetailLostFound,
   };
 })();
 
