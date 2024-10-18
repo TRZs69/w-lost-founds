@@ -83,8 +83,8 @@ function App() {
             <Route path="/*" element={<NotFoundPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/users/me" element={<ProfilePage />} />
-            <Route path="/lost-founds/:id" element={<LostFoundDetailPage />} />
-            <Route path="/lost-founds/add" element={<LostFoundAddPage />} />
+            <Route path="/lostfound/:id" element={<LostFoundDetailPage />} />
+            <Route path="/lostfound/add" element={<LostFoundAddPage />} />
           </Routes>
         </main>
       </div>

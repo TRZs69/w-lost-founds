@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import LostFoundItem, { lostFoundItemShape } from "./LostFoundItem";
 
-function LostFoundList({ lostfounds, onDeleteLostFound }) {
+function LostFoundList({ lostfound, onDeleteLostFound }) {
   return (
     <div>
-      {lostfounds.map((lostfound) => (
+      {lostfound.map((lostfound) => (
         <LostFoundItem
           key={lostfound.id}
           lostfound={lostfound}
@@ -16,7 +16,7 @@ function LostFoundList({ lostfounds, onDeleteLostFound }) {
 }
 
 LostFoundList.propTypes = {
-  lostfounds: PropTypes.arrayOf(PropTypes.shape(lostFoundItemShape)).isRequired,
+  lostfound: PropTypes.arrayOf(PropTypes.shape(lostFoundItemShape)).isRequired,
   onDeleteLostFound: PropTypes.func.isRequired,
 };
 

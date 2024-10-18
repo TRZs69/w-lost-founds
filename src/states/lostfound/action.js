@@ -10,7 +10,7 @@ const ActionType = {
   EDIT_LOSTFOUND: "EDIT_LOSTFOUND",
 };
 
-function getLostFoundsActionCreator(lostfound) {
+function getLostFoundActionCreator(lostfound) {
   return {
     type: ActionType.GET_LOSTFOUND,
     payload: {
@@ -80,12 +80,12 @@ function asyncChangeCoverLostFound({ id, cover }) {
   };
 }
 
-function asyncGetLostFounds(is_finished) {
+function asyncGetLostFound(is_completed) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      const lostfounds = await api.getAllLostFounds(is_finished);
-      dispatch(getLostFoundsActionCreator(lostfounds));
+      const lostfound = await api.getAllLostFound(is_completed);
+      dispatch(getLostFoundActionCreator(lostfound));
     } catch (error) {
       showErrorDialog(error.message);
     }
@@ -93,12 +93,19 @@ function asyncGetLostFounds(is_finished) {
   };
 }
 
-function asyncAddLostFound({ title, description, status}) {
+function asyncAddLostFound({ title, description, status }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      await api.postAddLostFound({ title, description, status});
-      dispatch(addLostFoundActionCreator(true));
+      const newLostFound = await api.postAddLostFound({
+        title,
+        description,
+        status,
+      });
+      dispatch({
+        type: ActionType.ADD_LOSTFOUND,
+        payload: { status: true, lostfound: newLostFound },
+      });
     } catch (error) {
       showErrorDialog(error.message);
     }
@@ -119,11 +126,17 @@ function asyncDeleteLostFound(id) {
   };
 }
 
-function asyncEditLostFound(id, title, description, is_finished) {
+function asyncEditLostFound(id, title, description, status, is_completed) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      await api.putUpdateLostFound({ id, title, description, is_finished });
+      await api.putUpdateLostFound({
+        id,
+        title,
+        description,
+        status,
+        is_completed,
+      });
 
       const updatedLostFound = await api.getDetailLostFound(id);
 
@@ -150,8 +163,8 @@ function asyncDetailLostFound(id) {
 
 export {
   ActionType,
-  getLostFoundsActionCreator,
-  asyncGetLostFounds,
+  getLostFoundActionCreator,
+  asyncGetLostFound,
   addLostFoundActionCreator,
   asyncAddLostFound,
   deleteLostFoundActionCreator,

@@ -5,7 +5,7 @@ import { postedAt } from "../utils/tools";
 import { FaClock, FaPenToSquare, FaUpload } from "react-icons/fa6";
 import api from "../utils/api";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncDetailLostFound } from "../states/lostfounds/action"; // Updated action
+import { asyncDetailLostFound } from "../states/lostfound/action"; // Updated action
 import { useParams } from "react-router-dom";
 
 function LostFoundDetail({ lostfound, onEditLostFound }) {
@@ -49,7 +49,7 @@ function LostFoundDetail({ lostfound, onEditLostFound }) {
   const handleCoverUpload = async (file) => {
     setIsUploading(true);
     try {
-      const message = await api.postChangeCoverTodo({
+      const message = await api.postChangeCoverLostFound({
         id: lostfound.id,
         cover: file,
       });

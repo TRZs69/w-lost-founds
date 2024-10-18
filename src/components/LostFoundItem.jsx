@@ -19,10 +19,7 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
         <div className="row align-items-center">
           <div className="col-8 d-flex">
             <h5>
-              <Link
-                to={`/lost-founds/${lostfound.id}`}
-                className="text-primary"
-              >
+              <Link to={`/lostfound/${lostfound.id}`} className="text-primary">
                 {lostfound.title}
               </Link>
             </h5>

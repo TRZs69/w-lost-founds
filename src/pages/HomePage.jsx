@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LostFoundList from "../components/LostFoundList";
 import {
-  asyncGetLostFounds,
+  asyncGetLostFound,
   asyncDeleteLostFound,
   deleteLostFoundActionCreator,
-} from "../states/lostfounds/action";
+} from "../states/lostfound/action";
 
 function HomePage() {
-  const { lostfounds = [], isDeleteLostFound = false } = useSelector(
+  const { lostfound = [], isDeleteLostFound = false } = useSelector(
     (states) => states
   );
 
@@ -29,7 +29,7 @@ function HomePage() {
       });
       dispatch(deleteLostFoundActionCreator(false));
     }
-    dispatch(asyncGetLostFounds(is_finished));
+    dispatch(asyncGetLostFound(is_finished));
   }, [dispatch, isDeleteLostFound, is_finished]);
 
   const onDeleteLostFound = (id) => {
@@ -40,7 +40,7 @@ function HomePage() {
     <section>
       <div className="container pt-1">
         <LostFoundList
-          lostfounds={lostfounds}
+          lostfound={lostfound}
           onDeleteLostFound={onDeleteLostFound}
         ></LostFoundList>
       </div>

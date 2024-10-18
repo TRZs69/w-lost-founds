@@ -1,19 +1,19 @@
 import { ActionType } from "./action";
 
-function lostfoundsReducer(lostfounds = [], action = {}) {
+function lostfoundReducer(lostfound = [], action = {}) {
   switch (action.type) {
-    case ActionType.GET_LOSTFOUNDS:
-      return action.payload.lostfounds;
+    case ActionType.GET_LOSTFOUND:
+      return action.payload.lostfound || lostfound;
 
     case ActionType.EDIT_LOSTFOUND:
-      return lostfounds.map((lostfound) =>
-        lostfound.id === action.payload.lostfound.id
+      return lostfound.map((item) =>
+        item.id === action.payload.lostfound.id
           ? action.payload.lostfound
-          : lostfound
+          : item
       );
 
     default:
-      return lostfounds;
+      return lostfound;
   }
 }
 
@@ -54,7 +54,7 @@ function detailLostFoundReducer(lostfound = null, action = {}) {
 }
 
 export {
-  lostfoundsReducer,
+  lostfoundReducer,
   isAddLostFoundReducer,
   isDeleteLostFoundReducer,
   isEditLostFoundReducer,

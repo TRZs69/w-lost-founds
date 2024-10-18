@@ -91,8 +91,8 @@ const api = (() => {
     return message;
   }
 
-  // API LostFounds => https://public-api.delcom.org/docs/1.0/apilostfounds
-  async function postAddLostFound({ title, description ,status}) {
+  // API LostFound => https://public-api.delcom.org/docs/1.0/api/lost-founds
+  async function postAddLostFound({ title, description, status }) {
     const response = await _fetchWithAuth(`${BASE_URL}/lost-founds`, {
       method: "POST",
       headers: {
@@ -133,8 +133,20 @@ const api = (() => {
     return message;
   }
 
-  async function putUpdateLostFound({ id, title, description, is_finished }) {
-    console.log("Updating lostfound:", { id, title, description, is_finished });
+  async function putUpdateLostFound({
+    id,
+    title,
+    description,
+    status,
+    is_completed,
+  }) {
+    console.log("Updating lostfound:", {
+      id,
+      title,
+      description,
+      status,
+      is_completed,
+    });
 
     const response = await _fetchWithAuth(`${BASE_URL}/lost-founds/${id}`, {
       method: "PUT",
@@ -144,7 +156,8 @@ const api = (() => {
       body: JSON.stringify({
         title,
         description,
-        is_finished,
+        status,
+        is_completed,
       }),
     });
 
@@ -174,9 +187,9 @@ const api = (() => {
     return message;
   }
 
-  async function getAllLostFounds(is_finished) {
+  async function getAllLostFound(is_completed) {
     const response = await _fetchWithAuth(
-      `${BASE_URL}/lost-founds?is_finished=${is_finished}`
+      `${BASE_URL}/lost-founds?is_finished=${is_completed}`
     );
     const responseJson = await response.json();
 
@@ -185,9 +198,9 @@ const api = (() => {
       throw new Error(message);
     }
     const {
-      data: { lostfounds },
+      data: { lostfound },
     } = responseJson;
-    return lostfounds;
+    return lostfound;
   }
 
   async function getDetailLostFound(id) {
@@ -214,7 +227,7 @@ const api = (() => {
     postChangeCoverLostFound,
     putUpdateLostFound,
     deleteLostFound,
-    getAllLostFounds,
+    getAllLostFound,
     getDetailLostFound,
   };
 })();

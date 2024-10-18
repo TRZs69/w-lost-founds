@@ -28,7 +28,7 @@ function Navigation({ authLogin, onAuthSignOut }) {
               <li className="mt-2">
                 <Link
                   className="btn btn-light btn-sm text-dark"
-                  to="/lost-founds/add"
+                  to="/lostfound/add"
                 >
                   <FaPlus /> Add Lost & Found
                 </Link>

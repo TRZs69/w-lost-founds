@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   asyncDetailLostFound,
   asyncEditLostFound,
-} from "../states/lostfounds/action";
+} from "../states/lostfound/action";
 import LostFoundDetail from "../components/LostFoundDetail";
 
 function LostFoundDetailPage() {

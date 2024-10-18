@@ -5,12 +5,12 @@ import isPreloadReducer from "./isPreload/reducer";
 import isAuthRegisterReducer from "./isAuthRegister/reducer";
 import isUserChangePhotoReducer from "./isUserChangePhoto/reducer";
 import {
-  lostfoundsReducer,
+  lostfoundReducer,
   isAddLostFoundReducer,
   isDeleteLostFoundReducer,
   isEditLostFoundReducer,
   detailLostFoundReducer,
-} from "./lostfounds/reducer"; // Adjust the import path according to your folder structure
+} from "./lostfound/reducer"; // Adjust the import path according to your folder structure
 
 const store = configureStore({
   reducer: {
@@ -24,11 +24,11 @@ const store = configureStore({
     isUserChangePhoto: isUserChangePhotoReducer,
 
     // Lost and Found
-    lostFounds: lostfoundsReducer, // Changed from todos to lostFounds
-    isAddLostFound: isAddLostFoundReducer, // Changed from isAddTodo
-    isDeleteLostFound: isDeleteLostFoundReducer, // Changed from isDeleteTodo
-    isEditLostFound: isEditLostFoundReducer, // Changed from isEditTodo
-    detailLostFound: detailLostFoundReducer, // Changed from detailTodo
+    lostFound: lostfoundReducer,
+    isAddLostFound: isAddLostFoundReducer,
+    isDeleteLostFound: isDeleteLostFoundReducer,
+    isEditLostFound: isEditLostFoundReducer,
+    detailLostFound: detailLostFoundReducer,
   },
 });
 
