@@ -1,7 +1,15 @@
 body {
-  background-color: #e8e8e8;
+  background: repeating-linear-gradient(
+    #f5e7dd,
+    #9bbabd,
+    #51777c,
+    #c4d5c4,
+    #eeeeee
+  );
+
   margin-bottom: 50px;
 }
+
 a {
   text-decoration: none;
 }
@@ -10,7 +18,7 @@ a {
 }
 .nav-item {
   display: table-cell;
-  background: #0d6efd2e;
+  background: #39883d2e;
 }
 .nav-profile {
   border-radius: 50%;
@@ -24,7 +32,7 @@ a {
   overflow: hidden !important;
   width: 100vw;
   height: 100vh;
-  background-color: #e8e8e8;
+  background-color: #b8e1f1;
 }
 .loader {
   position: absolute;
@@ -53,4 +61,53 @@ a {
   100% {
     transform: rotate(1turn);
   }
+}
+/* Ensure the entire page takes up full viewport height */
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: linear-gradient(
+    to right,
+    #00d2ff,
+    #3a7bd5
+  ); /* Gradient from blue to light blue */
+}
+
+/* Centering the form and applying styles */
+.form-container {
+  background-color: rgba(224, 233, 239, 0.841);
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-container h1 {
+  text-align: center;
+  color: #3a7bd5;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.btn-signup {
+  background-color: #3a7bd5; /* Warna biru */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 50px; /* Membuat tombol berbentuk bulat */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transisi untuk efek hover */
+}
+
+.btn-signup:hover {
+  background-color: #00d2ff; /* Warna lebih terang saat hover */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
+  transform: translateY(-2px); /* Efek melayang */
+}
+
+.btn-signup:active {
+  transform: translateY(0); /* Menghilangkan efek melayang saat diklik */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bayangan lebih kecil saat diklik */
 }
