@@ -4,11 +4,12 @@ import PropTypes from "prop-types";
 function LostFoundInput({ onAddLostFound }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("lost"); // State untuk status dengan nilai default "lost"
 
   function handleOnAddLostFound(e) {
     e.preventDefault(); // Prevent page refresh
     if (title.trim() && description.trim()) {
-      onAddLostFound({ title, description });
+      onAddLostFound({ title, description, status }); // Sertakan status
     }
   }
 
@@ -22,6 +23,10 @@ function LostFoundInput({ onAddLostFound }) {
     if (target.value.length <= 1000) {
       setDescription(target.value);
     }
+  }
+
+  function handleStatus({ target }) {
+    setStatus(target.value); // Update status berdasarkan input
   }
 
   return (

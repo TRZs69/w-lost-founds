@@ -93,11 +93,11 @@ function asyncGetLostFounds(is_finished) {
   };
 }
 
-function asyncAddLostFound({ title, description }) {
+function asyncAddLostFound({ title, description, status}) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      await api.postAddLostFound({ title, description });
+      await api.postAddLostFound({ title, description, status});
       dispatch(addLostFoundActionCreator(true));
     } catch (error) {
       showErrorDialog(error.message);

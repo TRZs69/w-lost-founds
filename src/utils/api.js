@@ -92,7 +92,7 @@ const api = (() => {
   }
 
   // API LostFounds => https://public-api.delcom.org/docs/1.0/apilostfounds
-  async function postAddLostFound({ title, description }) {
+  async function postAddLostFound({ title, description ,status}) {
     const response = await _fetchWithAuth(`${BASE_URL}/lost-founds`, {
       method: "POST",
       headers: {
@@ -101,6 +101,7 @@ const api = (() => {
       body: JSON.stringify({
         title,
         description,
+        status,
       }),
     });
     const responseJson = await response.json();

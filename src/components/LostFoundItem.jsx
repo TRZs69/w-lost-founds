@@ -75,6 +75,8 @@ const lostFoundItemShape = {
   cover: PropTypes.string,
   created_at: PropTypes.string.isRequired,
   updated_at: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  is_completed: PropTypes.number.isRequired,
 };
 
 LostFoundItem.propTypes = {

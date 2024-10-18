@@ -28,8 +28,8 @@ function LostFoundAddPage() {
     }
   }, [isAddLostFound, navigate, dispatch]);
 
-  const onAddLostFound = ({ title, description }) => {
-    dispatch(asyncAddLostFound({ title, description }));
+  const onAddLostFound = ({ title, description , status}) => {
+    dispatch(asyncAddLostFound({ title, description, status}));
   };
 
   return (
