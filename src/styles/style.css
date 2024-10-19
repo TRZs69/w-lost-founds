@@ -1,12 +1,5 @@
 body {
-  background: repeating-linear-gradient(
-    #f5e7dd,
-    #9bbabd,
-    #51777c,
-    #c4d5c4,
-    #eeeeee
-  );
-
+  background: linear-gradient(#f5e7dd, #9bbabd, #51777c, #c4d5c4, #eeeeee);
   margin-bottom: 50px;
 }
 
@@ -63,15 +56,18 @@ a {
   }
 }
 /* Ensure the entire page takes up full viewport height */
-.register-page {
+.register-page,
+.login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: linear-gradient(
-    to right,
-    #00d2ff,
-    #3a7bd5
-  ); /* Gradient from blue to light blue */
+    #f7bd94,
+    #9bbabd,
+    #51777c,
+    #c4d5c4,
+    #eeeeee
+  );
 }
 
 /* Centering the form and applying styles */
@@ -84,25 +80,25 @@ a {
 
 .form-container h1 {
   text-align: center;
-  color: #3a7bd5;
+  color: #3b8fde;
   font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
 .btn-signup {
-  background-color: #3a7bd5; /* Warna biru */
+  background-color: #51777c;
   color: white;
   border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 50px; /* Membuat tombol berbentuk bulat */
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 10px; /* Membuat tombol berbentuk bulat */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
   cursor: pointer;
   transition: all 0.3s ease; /* Transisi untuk efek hover */
 }
 
 .btn-signup:hover {
-  background-color: #00d2ff; /* Warna lebih terang saat hover */
+  background-color: #9bbabd; /* Warna lebih terang saat hover */
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Bayangan saat hover */
   transform: translateY(-2px); /* Efek melayang */
 }
@@ -110,4 +106,27 @@ a {
 .btn-signup:active {
   transform: translateY(0); /* Menghilangkan efek melayang saat diklik */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bayangan lebih kecil saat diklik */
+}
+
+.btn-login {
+  background-color: #51777c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 10px; /* More rectangular but slightly rounded */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #9bbabd;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-login:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

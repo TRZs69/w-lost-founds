@@ -27,6 +27,7 @@ function RegisterInput({ onAuthRegister }) {
           required
         />
       </div>
+
       <div className="mb-3">
         <label htmlFor="inputEmail" className="form-label">
           Email
@@ -41,6 +42,7 @@ function RegisterInput({ onAuthRegister }) {
           required
         />
       </div>
+
       <div className="mb-3">
         <label htmlFor="inputPassword" className="form-label">
           Password
@@ -55,7 +57,7 @@ function RegisterInput({ onAuthRegister }) {
         />
       </div>
       <div className="mb-4 text-end">
-        <button type="submit" className="btn btn-signup">
+        <button type="submit" className="btn-signup">
           Sign Up
         </button>
       </div>

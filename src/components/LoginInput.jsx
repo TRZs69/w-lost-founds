@@ -12,6 +12,7 @@ function LoginInput({ onAuthLogin }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>Login now!</h1>
       <div className="form px-4">
         <div className="mb-3">
           <label htmlFor="inputEmail" className="form-label">
@@ -41,7 +42,7 @@ function LoginInput({ onAuthLogin }) {
           />
         </div>
         <div className="mb-4 text-end b">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn-login">
             Login
           </button>
         </div>
