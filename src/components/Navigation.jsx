@@ -33,6 +33,15 @@ function Navigation({ authLogin, onAuthSignOut }) {
                   <FaPlus /> Add Lost & Found
                 </Link>
               </li>
+              <li className="nav-item mx-2">
+                <Link
+                  className="btn btn-light btn-sm text-dark"
+                  to="/pagestats"
+                >
+                  Page Stats
+                </Link>{" "}
+                {/* Added "Page Stats" Button */}
+              </li>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link mx-2 dropdown-toggle"

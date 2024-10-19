@@ -92,7 +92,7 @@ const api = (() => {
   }
 
   // API LostFounds => https://public-api.delcom.org/docs/1.0/apilostfounds
-  async function postAddLostFound({ title, description ,status}) {
+  async function postAddLostFound({ title, description, status }) {
     const response = await _fetchWithAuth(`${BASE_URL}/lost-founds`, {
       method: "POST",
       headers: {
@@ -202,6 +202,27 @@ const api = (() => {
     } = responseJson;
     return lostfound;
   }
+  async function getDailyStats() {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/lost-founds/stats/daily`
+    );
+    const responseJson = await response.json();
+    if (responseJson.success !== true) {
+      throw new Error(responseJson.message);
+    }
+    return responseJson.data;
+  }
+
+  async function getMonthlyStats() {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/lost-founds/stats/monthly`
+    );
+    const responseJson = await response.json();
+    if (responseJson.success !== true) {
+      throw new Error(responseJson.message);
+    }
+    return responseJson.data;
+  }
 
   return {
     putAccessToken,
@@ -216,6 +237,8 @@ const api = (() => {
     deleteLostFound,
     getAllLostFounds,
     getDetailLostFound,
+    getDailyStats,
+    getMonthlyStats,
   };
 })();
 

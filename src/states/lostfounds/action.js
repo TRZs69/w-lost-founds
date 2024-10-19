@@ -8,6 +8,8 @@ const ActionType = {
   DELETE_LOSTFOUND: "DELETE_LOSTFOUND",
   DETAIL_LOSTFOUND: "DETAIL_LOSTFOUND",
   EDIT_LOSTFOUND: "EDIT_LOSTFOUND",
+  GET_DAILY_STATS: "GET_DAILY_STATS",
+  GET_MONTHLY_STATS: "GET_MONTHLY_STATS",
 };
 
 function getLostFoundsActionCreator(lostfound) {
@@ -93,11 +95,11 @@ function asyncGetLostFounds(is_finished) {
   };
 }
 
-function asyncAddLostFound({ title, description, status}) {
+function asyncAddLostFound({ title, description, status }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      await api.postAddLostFound({ title, description, status});
+      await api.postAddLostFound({ title, description, status });
       dispatch(addLostFoundActionCreator(true));
     } catch (error) {
       showErrorDialog(error.message);
@@ -147,6 +149,33 @@ function asyncDetailLostFound(id) {
     dispatch(hideLoading());
   };
 }
+function getDailyStatsActionCreator(stats) {
+  return {
+    type: ActionType.GET_DAILY_STATS,
+    payload: { stats },
+  };
+}
+
+function getMonthlyStatsActionCreator(stats) {
+  return {
+    type: ActionType.GET_MONTHLY_STATS,
+    payload: { stats },
+  };
+}
+
+function asyncGetDailyStats() {
+  return async (dispatch) => {
+    const stats = await api.getDailyStats();
+    dispatch(getDailyStatsActionCreator(stats));
+  };
+}
+
+function asyncGetMonthlyStats() {
+  return async (dispatch) => {
+    const stats = await api.getMonthlyStats();
+    dispatch(getMonthlyStatsActionCreator(stats));
+  };
+}
 
 export {
   ActionType,
@@ -162,4 +191,6 @@ export {
   asyncDetailLostFound,
   changeCoverLostFoundActionCreator,
   asyncChangeCoverLostFound,
+  asyncGetDailyStats,
+  asyncGetMonthlyStats,
 };

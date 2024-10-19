@@ -52,6 +52,15 @@ function detailLostFoundReducer(lostfound = null, action = {}) {
       return lostfound;
   }
 }
+function statsReducer(stats = [], action = {}) {
+  switch (action.type) {
+    case ActionType.GET_DAILY_STATS:
+    case ActionType.GET_MONTHLY_STATS:
+      return action.payload.stats;
+    default:
+      return stats;
+  }
+}
 
 export {
   lostfoundsReducer,
@@ -59,4 +68,5 @@ export {
   isDeleteLostFoundReducer,
   isEditLostFoundReducer,
   detailLostFoundReducer,
+  statsReducer,
 };
