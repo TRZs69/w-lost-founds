@@ -13,12 +13,11 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
     badgeLabel = "Belum Selesai";
   }
 
-  // Set the badge class for the lost/found status
   let statusClass = "badge ms-3";
   if (lostfound.status === "lost") {
-    statusClass += " bg-danger text-white"; // Red for lost
+    statusClass += " bg-danger text-white";
   } else if (lostfound.status === "found") {
-    statusClass += " bg-info text-white"; // Blue for found
+    statusClass += " bg-info text-white";
   }
 
   return (
@@ -41,7 +40,6 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
             <span className={statusClass}>
               {lostfound.status === "lost" ? "Lost" : "Found"}
             </span>
-
             <button
               type="button"
               onClick={() => {
