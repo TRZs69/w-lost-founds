@@ -5,7 +5,7 @@ import { FaClock, FaTrash } from "react-icons/fa6";
 
 function LostFoundItem({ lostfound, onDeleteLostFound }) {
   let badgeStatus, badgeLabel;
-  if (lostfound.is_finished) {
+  if (lostfound.is_completed) {
     badgeStatus = "badge bg-success text-white ms-3";
     badgeLabel = "Selesai";
   } else {

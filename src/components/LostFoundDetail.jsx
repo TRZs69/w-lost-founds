@@ -16,7 +16,9 @@ function LostFoundDetail({ lostfound, onEditLostFound }) {
   const [editedDescription, setEditedDescription] = useState(
     lostfound?.description || ""
   );
-  const [editedStatus, setEditedStatus] = useState(lostfound?.is_finished || 0);
+  const [editedStatus, setEditedStatus] = useState(
+    lostfound?.is_completed || 0
+  );
   const [previewCover, setPreviewCover] = useState(lostfound?.cover || null);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -32,7 +34,7 @@ function LostFoundDetail({ lostfound, onEditLostFound }) {
     if (lostfound) {
       setEditedTitle(lostfound.title);
       setEditedDescription(lostfound.description);
-      setEditedStatus(lostfound.is_finished);
+      setEditedStatus(lostfound.is_completed);
       setPreviewCover(lostfound.cover); // Set the existing cover if available
     }
   }, [lostfound]);
@@ -70,10 +72,10 @@ function LostFoundDetail({ lostfound, onEditLostFound }) {
     setIsEditing(false);
   };
 
-  let badgeStatus = lostfound.is_finished
+  let badgeStatus = lostfound.is_completed
     ? "badge bg-success text-white ms-3"
     : "badge bg-warning text-dark ms-3";
-  let badgeLabel = lostfound.is_finished ? "Selesai" : "Belum Selesai";
+  let badgeLabel = lostfound.is_completed ? "Selesai" : "Belum Selesai";
 
   return (
     <div className="card mt-3">

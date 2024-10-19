@@ -19,8 +19,14 @@ function LostFoundDetailPage() {
     }
   }, [id, dispatch]);
 
-  const handleEditLostFound = (id, title, description, is_finished) => {
-    dispatch(asyncEditLostFound(id, title, description, is_finished));
+  const handleEditLostFound = (
+    id,
+    title,
+    description,
+    status,
+    is_completed
+  ) => {
+    dispatch(asyncEditLostFound(id, title, description, status, is_completed));
 
     Swal.fire({
       icon: "success",

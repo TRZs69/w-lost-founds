@@ -10,7 +10,7 @@ import {
   isDeleteLostFoundReducer,
   isEditLostFoundReducer,
   detailLostFoundReducer,
-} from "./lostfound/reducer"; // Adjust the import path according to your folder structure
+} from "./lostfound/reducer"; 
 
 const store = configureStore({
   reducer: {

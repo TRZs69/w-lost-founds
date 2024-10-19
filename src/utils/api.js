@@ -162,11 +162,11 @@ const api = (() => {
     });
 
     const responseJson = await response.json();
-    console.log("API response:", responseJson); // Log the entire API response
+    console.log("API response:", responseJson);
 
     const { success, message } = responseJson;
     if (success !== true) {
-      throw new Error(message); // Handle error message if success is false
+      throw new Error(message);
     }
 
     return message;
@@ -187,9 +187,9 @@ const api = (() => {
     return message;
   }
 
-  async function getAllLostFound(is_completed) {
+  async function getAllLostFounds(is_completed, is_me, status) {
     const response = await _fetchWithAuth(
-      `${BASE_URL}/lost-founds?is_finished=${is_completed}`
+      `${BASE_URL}/lost-founds?is_completed=${is_completed}&is_me=${is_me}&status=${status}`
     );
     const responseJson = await response.json();
 
@@ -227,7 +227,7 @@ const api = (() => {
     postChangeCoverLostFound,
     putUpdateLostFound,
     deleteLostFound,
-    getAllLostFound,
+    getAllLostFounds,
     getDetailLostFound,
   };
 })();

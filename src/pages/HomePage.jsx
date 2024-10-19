@@ -13,7 +13,7 @@ function HomePage() {
   );
 
   const queryParams = new URLSearchParams(location.search);
-  const is_finished = queryParams.get("is_finished") || "";
+  const is_completed = queryParams.get("is_completed") || "";
 
   const dispatch = useDispatch();
 
@@ -29,8 +29,8 @@ function HomePage() {
       });
       dispatch(deleteLostFoundActionCreator(false));
     }
-    dispatch(asyncGetLostFound(is_finished));
-  }, [dispatch, isDeleteLostFound, is_finished]);
+    dispatch(asyncGetLostFound(is_completed));
+  }, [dispatch, isDeleteLostFound, is_completed]);
 
   const onDeleteLostFound = (id) => {
     dispatch(asyncDeleteLostFound(id));

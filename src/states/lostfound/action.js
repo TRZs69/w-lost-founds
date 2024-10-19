@@ -3,18 +3,18 @@ import api from "../../utils/api";
 import { showErrorDialog } from "../../utils/tools";
 
 const ActionType = {
-  GET_LOSTFOUND: "GET_LOSTFOUND",
+  GET_LOSTFOUNDS: "GET_LOSTFOUNDS",
   ADD_LOSTFOUND: "ADD_LOSTFOUND",
   DELETE_LOSTFOUND: "DELETE_LOSTFOUND",
   DETAIL_LOSTFOUND: "DETAIL_LOSTFOUND",
   EDIT_LOSTFOUND: "EDIT_LOSTFOUND",
 };
 
-function getLostFoundActionCreator(lostfound) {
+function getLostFoundsActionCreator(lostfounds) {
   return {
-    type: ActionType.GET_LOSTFOUND,
+    type: ActionType.GET_LOSTFOUNDS,
     payload: {
-      lostfound,
+      lostfounds,
     },
   };
 }
@@ -80,12 +80,12 @@ function asyncChangeCoverLostFound({ id, cover }) {
   };
 }
 
-function asyncGetLostFound(is_completed) {
+function asyncGetLostFounds(is_completed, is_me, status) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      const lostfound = await api.getAllLostFound(is_completed);
-      dispatch(getLostFoundActionCreator(lostfound));
+      const lostfound = await api.getAllLostFounds(is_completed, is_me, status);
+      dispatch(getLostFoundsActionCreator(lostfound));
     } catch (error) {
       showErrorDialog(error.message);
     }
@@ -163,8 +163,8 @@ function asyncDetailLostFound(id) {
 
 export {
   ActionType,
-  getLostFoundActionCreator,
-  asyncGetLostFound,
+  getLostFoundsActionCreator,
+  asyncGetLostFounds,
   addLostFoundActionCreator,
   asyncAddLostFound,
   deleteLostFoundActionCreator,
