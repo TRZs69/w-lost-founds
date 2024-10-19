@@ -13,6 +13,14 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
     badgeLabel = "Belum Selesai";
   }
 
+  // Set the badge class for the lost/found status
+  let statusClass = "badge ms-3";
+  if (lostfound.status === "lost") {
+    statusClass += " bg-danger text-white"; // Red for lost
+  } else if (lostfound.status === "found") {
+    statusClass += " bg-info text-white"; // Blue for found
+  }
+
   return (
     <div className="card mt-3">
       <div className="card-body">
@@ -30,10 +38,13 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
           </div>
 
           <div className="col-4 text-end">
+            <span className={statusClass}>
+              {lostfound.status === "lost" ? "Lost" : "Found"}
+            </span>
+
             <button
               type="button"
               onClick={() => {
-                // eslint-disable-next-line no-undef
                 Swal.fire({
                   title: "Hapus LostFound",
                   text: `Apakah kamu yakin ingin menghapus lostfound: ${lostfound.title}?`,
@@ -51,15 +62,21 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
                   }
                 });
               }}
-              className="btn btn-sm btn-outline-danger"
+              className="btn btn-sm btn-outline-danger ms-3"
             >
               <FaTrash /> Hapus
             </button>
           </div>
+
           <div className="col-12">
             <div className="text-sm op-5">
               <FaClock />
               <span className="ps-2">{postedAt(lostfound.created_at)}</span>
+              <span className="ms-3 text-muted">
+                {lostfound.author
+                  ? `by ${lostfound.author.name}`
+                  : "Author unknown"}
+              </span>
             </div>
           </div>
         </div>
@@ -73,9 +90,13 @@ const lostFoundItemShape = {
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   is_completed: PropTypes.number.isRequired,
+  is_me: PropTypes.number.isRequired,
   cover: PropTypes.string,
   created_at: PropTypes.string.isRequired,
   updated_at: PropTypes.string.isRequired,
+  author: PropTypes.shape({
+    name: PropTypes.string, // author data
+  }),
 };
 
 LostFoundItem.propTypes = {

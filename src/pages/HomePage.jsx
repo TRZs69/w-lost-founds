@@ -2,24 +2,28 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LostFoundList from "../components/LostFoundList";
 import {
-  asyncGetLostFound,
+  asyncGetLostFounds,
   asyncDeleteLostFound,
   deleteLostFoundActionCreator,
 } from "../states/lostfound/action";
 
 function HomePage() {
-  const { lostfound = [], isDeleteLostFound = false } = useSelector(
-    (states) => states
+  const { lostfounds = [], isDeleteLostFound = false } = useSelector(
+    (state) => ({
+      lostfounds: state.lostfounds,
+      isDeleteLostFound: state.isDeleteLostFound,
+    })
   );
 
   const queryParams = new URLSearchParams(location.search);
   const is_completed = queryParams.get("is_completed") || "";
+  const is_me = queryParams.get("is_me") || "";
+  const status = queryParams.get("status") || "";
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isDeleteLostFound) {
-      // eslint-disable-next-line no-undef
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -29,7 +33,7 @@ function HomePage() {
       });
       dispatch(deleteLostFoundActionCreator(false));
     }
-    dispatch(asyncGetLostFound(is_completed));
+    dispatch(asyncGetLostFounds(is_completed, is_me, status));
   }, [dispatch, isDeleteLostFound, is_completed]);
 
   const onDeleteLostFound = (id) => {
@@ -40,7 +44,7 @@ function HomePage() {
     <section>
       <div className="container pt-1">
         <LostFoundList
-          lostfound={lostfound}
+          lostfounds={lostfounds || []}
           onDeleteLostFound={onDeleteLostFound}
         ></LostFoundList>
       </div>

@@ -3,7 +3,7 @@ import { ActionType } from "./action";
 function lostfoundReducer(lostfounds = [], action = {}) {
   switch (action.type) {
     case ActionType.GET_LOSTFOUNDS:
-      return action.payload.lostfounds;
+      return action.payload.lostfounds || [];
 
     case ActionType.EDIT_LOSTFOUND:
       return lostfounds.map((lostfound) =>
@@ -11,7 +11,6 @@ function lostfoundReducer(lostfounds = [], action = {}) {
           ? action.payload.lostfound
           : lostfound
       );
-
     default:
       return lostfounds;
   }

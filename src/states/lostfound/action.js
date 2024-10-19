@@ -84,12 +84,20 @@ function asyncGetLostFounds(is_completed, is_me, status) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      const lostfound = await api.getAllLostFounds(is_completed, is_me, status);
-      dispatch(getLostFoundsActionCreator(lostfound));
+      const lostfounds = await api.getAllLostFounds(
+        is_completed,
+        is_me,
+        status
+      );
+
+      dispatch(getLostFoundsActionCreator(lostfounds));
+      return lostfounds;
     } catch (error) {
       showErrorDialog(error.message);
+      return undefined;
+    } finally {
+      dispatch(hideLoading());
     }
-    dispatch(hideLoading());
   };
 }
 

@@ -193,14 +193,15 @@ const api = (() => {
     );
     const responseJson = await response.json();
 
-    const { success, message } = responseJson;
-    if (success !== true) {
+    const { success, message, data } = responseJson;
+    if (!success) {
       throw new Error(message);
     }
+
     const {
-      data: { lostfound },
+      data: { lost_founds },
     } = responseJson;
-    return lostfound;
+    return lost_founds;
   }
 
   async function getDetailLostFound(id) {
@@ -210,10 +211,11 @@ const api = (() => {
     if (success !== true) {
       throw new Error(message);
     }
+
     const {
-      data: { lostfound },
+      data: { lost_found },
     } = responseJson;
-    return lostfound;
+    return lost_found;
   }
 
   return {
