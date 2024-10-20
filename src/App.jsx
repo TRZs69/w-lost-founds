@@ -12,6 +12,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import LostFoundAddPage from "./pages/LostFoundAddPage";
 import LostFoundDetailPage from "./pages/LostFoundDetailPage";
+import LostFoundStatsPage from "./pages/LostFoundStatsPage";
 
 function App() {
   const { authLogin = null, isPreload = false } = useSelector(
@@ -85,6 +86,7 @@ function App() {
             <Route path="/users/me" element={<ProfilePage />} />
             <Route path="/lostfound/:id" element={<LostFoundDetailPage />} />
             <Route path="/lostfound/add" element={<LostFoundAddPage />} />
+            <Route path="/lostfound/stats" element={<LostFoundStatsPage />} />
           </Routes>
         </main>
       </div>

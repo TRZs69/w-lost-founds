@@ -25,7 +25,6 @@ function HomePage() {
   useEffect(() => {
     if (isDeleteLostFound) {
       Swal.fire({
-        position: "top-end",
         icon: "success",
         title: "LostFound berhasil dihapus!",
         showConfirmButton: false,

@@ -1,6 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { FaPlus, FaUser, FaRightFromBracket } from "react-icons/fa6";
+import {
+  FaPlus,
+  FaUser,
+  FaRightFromBracket,
+  FaStackExchange,
+  FaChartColumn,
+} from "react-icons/fa6";
+import { FaChartBar } from "react-icons/fa";
 
 function Navigation({ authLogin, onAuthSignOut }) {
   const { id, name, photo } = authLogin;
@@ -25,6 +32,14 @@ function Navigation({ authLogin, onAuthSignOut }) {
           </button>
           <div className="collapse navbar-collapse" id="navApp">
             <ul className="navbar-nav ms-auto">
+              <li className="mt-2">
+                <Link
+                  className="btn btn-light btn-sm text-dark me-2"
+                  to="/lostfound/stats"
+                >
+                  <FaChartColumn /> Stats
+                </Link>
+              </li>
               <li className="mt-2">
                 <Link
                   className="btn btn-light btn-sm text-dark"

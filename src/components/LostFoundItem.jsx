@@ -93,7 +93,7 @@ const lostFoundItemShape = {
   created_at: PropTypes.string.isRequired,
   updated_at: PropTypes.string.isRequired,
   author: PropTypes.shape({
-    name: PropTypes.string, // author data
+    name: PropTypes.string,
   }),
 };
 

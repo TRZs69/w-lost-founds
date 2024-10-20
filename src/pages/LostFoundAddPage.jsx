@@ -17,7 +17,6 @@ function LostFoundAddPage() {
     if (isAddLostFound) {
       // eslint-disable-next-line no-undef
       Swal.fire({
-        position: "top-end",
         icon: "success",
         title: "LostFound berhasil ditambahkan!",
         showConfirmButton: false,

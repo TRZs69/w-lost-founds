@@ -30,7 +30,7 @@ function LostFoundDetailPage() {
 
     Swal.fire({
       icon: "success",
-      title: "Berhasil mengedit lostfound!",
+      title: "Berhasil mengedit LostFound!",
       showConfirmButton: false,
       timer: 1200,
     });

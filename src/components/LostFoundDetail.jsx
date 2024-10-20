@@ -57,7 +57,6 @@ function LostFoundDetail({ lostfound, onEditLostFound }) {
         id: lostfound.id,
         cover: file,
       });
-      console.log("Cover updated:", message);
       dispatch(asyncDetailLostFound(lostfound.id));
     } catch (error) {
       console.error("Failed to upload cover:", error.message);

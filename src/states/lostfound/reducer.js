@@ -52,10 +52,32 @@ function detailLostFoundReducer(lostfound = null, action = {}) {
   }
 }
 
+function statsDailyReducer(stats = null, action = {}) {
+  switch (action.type) {
+    case ActionType.GET_STATS_DAILY:
+      console.log("Updating daily stats in reducer:", action.payload.stats);
+      return action.payload.stats || null;
+    default:
+      return stats;
+  }
+}
+
+function statsMonthlyReducer(stats = null, action = {}) {
+  switch (action.type) {
+    case ActionType.GET_STATS_MONTHLY:
+      console.log("Updating monthly stats in reducer:", action.payload.stats);
+      return action.payload.stats || null;
+    default:
+      return stats;
+  }
+}
+
 export {
   lostfoundReducer,
   isAddLostFoundReducer,
   isDeleteLostFoundReducer,
   isEditLostFoundReducer,
   detailLostFoundReducer,
+  statsDailyReducer,
+  statsMonthlyReducer,
 };

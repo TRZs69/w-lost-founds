@@ -8,6 +8,8 @@ const ActionType = {
   DELETE_LOSTFOUND: "DELETE_LOSTFOUND",
   DETAIL_LOSTFOUND: "DETAIL_LOSTFOUND",
   EDIT_LOSTFOUND: "EDIT_LOSTFOUND",
+  GET_STATS_DAILY: "GET_STATS_DAILY",
+  GET_STATS_MONTHLY: "GET_STATS_MONTHLY",
 };
 
 function getLostFoundsActionCreator(lostfounds) {
@@ -60,6 +62,24 @@ function changeCoverLostFoundActionCreator(lostfound) {
     type: ActionType.DETAIL_LOSTFOUND,
     payload: {
       lostfound,
+    },
+  };
+}
+
+function getStatsDailyActionCreator(stats) {
+  return {
+    type: ActionType.GET_STATS_DAILY,
+    payload: {
+      stats,
+    },
+  };
+}
+
+function getStatsMonthlyActionCreator(stats) {
+  return {
+    type: ActionType.GET_STATS_MONTHLY,
+    payload: {
+      stats,
     },
   };
 }
@@ -169,6 +189,38 @@ function asyncDetailLostFound(id) {
   };
 }
 
+function asyncGetStatsDaily(end_date, total_data) {
+  return async (dispatch) => {
+    console.log("Executing asyncGetStatsDaily..."); // Add this log to confirm function execution
+    dispatch(showLoading());
+    try {
+      const stats = await api.getStatsDaily({ end_date, total_data });
+      console.log("Daily stats received:", stats); // Check if data is received
+      dispatch(getStatsDailyActionCreator(stats));
+    } catch (error) {
+      console.error("Error fetching daily stats:", error.message); // Check for errors
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
+function asyncGetStatsMonthly(end_date, total_data) {
+  return async (dispatch) => {
+    console.log("Executing asyncGetStatsMonthly..."); // Add this log to confirm function execution
+    dispatch(showLoading());
+    try {
+      const stats = await api.getStatsMonthly({ end_date, total_data });
+      console.log("Monthly stats received:", stats); // Check if data is received
+      dispatch(getStatsMonthlyActionCreator(stats));
+    } catch (error) {
+      console.error("Error fetching monthly stats:", error.message); // Check for errors
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
 export {
   ActionType,
   getLostFoundsActionCreator,
@@ -183,4 +235,8 @@ export {
   asyncDetailLostFound,
   changeCoverLostFoundActionCreator,
   asyncChangeCoverLostFound,
+  getStatsDailyActionCreator,
+  asyncGetStatsDaily,
+  getStatsMonthlyActionCreator,
+  asyncGetStatsMonthly,
 };
