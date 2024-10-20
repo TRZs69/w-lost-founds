@@ -140,14 +140,6 @@ const api = (() => {
     status,
     is_completed,
   }) {
-    console.log("Updating lostfound:", {
-      id,
-      title,
-      description,
-      status,
-      is_completed,
-    });
-
     const response = await _fetchWithAuth(`${BASE_URL}/lost-founds/${id}`, {
       method: "PUT",
       headers: {
@@ -162,7 +154,6 @@ const api = (() => {
     });
 
     const responseJson = await response.json();
-    console.log("API response:", responseJson);
 
     const { success, message } = responseJson;
     if (success !== true) {
@@ -187,9 +178,58 @@ const api = (() => {
     return message;
   }
 
-  async function getAllLostFounds(is_completed, is_me, status) {
+  async function getAllLostFounds() {
+    const response = await _fetchWithAuth(`${BASE_URL}/lost-founds`);
+    const responseJson = await response.json();
+
+    const { success, message, data } = responseJson;
+    if (!success) {
+      throw new Error(message);
+    }
+
+    console.log("API response:", responseJson);
+
+    const {
+      data: { lost_founds },
+    } = responseJson;
+    return lost_founds;
+  }
+
+  async function getStatsDaily() {
     const response = await _fetchWithAuth(
-      `${BASE_URL}/lost-founds?is_completed=${is_completed}&is_me=${is_me}&status=${status}`
+      `${BASE_URL}/lost-founds/stats/daily`
+    );
+    const responseJson = await response.json();
+
+    const { success, message, data } = responseJson;
+    if (!success) {
+      throw new Error(message);
+    }
+
+    console.log("API response:", responseJson);
+
+    const {
+      stats_lost,
+      stats_losts_completed,
+      stats_losts_process,
+      stats_founds,
+      stats_founds_completed,
+      stats_founds_process,
+    } = data;
+
+    return {
+      stats_lost,
+      stats_losts_completed,
+      stats_losts_process,
+      stats_founds,
+      stats_founds_completed,
+      stats_founds_process,
+    };
+  }
+
+  async function getStatsMonthly() {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/lost-founds/stats/monthly`
     );
     const responseJson = await response.json();
 
@@ -199,41 +239,22 @@ const api = (() => {
     }
 
     const {
-      data: { lost_founds },
-    } = responseJson;
-    return lost_founds;
-  }
+      stats_lost,
+      stats_losts_completed,
+      stats_losts_process,
+      stats_founds,
+      stats_founds_completed,
+      stats_founds_process,
+    } = data;
 
-  // Get Stats Daily
-  async function getStatsDaily({ end_date, total_data }) {
-    const url = `${BASE_URL}/lost-founds/stats/daily?end_date=${end_date}&total_data=${total_data}`;
-    console.log("Fetching daily stats from API with URL:", url); // Log the URL being fetched
-    const response = await _fetchWithAuth(url, {
-      method: "GET",
-    });
-    const responseJson = await response.json();
-    console.log("Daily stats API response:", responseJson); // Log the response
-    const { success, message, data } = responseJson;
-    if (!success) {
-      throw new Error(message);
-    }
-    return data;
-  }
-
-  // Get Stats Monthly
-  async function getStatsMonthly({ end_date, total_data }) {
-    const url = `${BASE_URL}/lost-founds/stats/monthly?end_date=${end_date}&total_data=${total_data}`;
-    console.log("Fetching monthly stats from API with URL:", url);
-    const response = await _fetchWithAuth(url, {
-      method: "GET",
-    });
-    const responseJson = await response.json();
-    console.log("Monthly stats API response:", responseJson);
-    const { success, message, data } = responseJson;
-    if (!success) {
-      throw new Error(message);
-    }
-    return data;
+    return {
+      stats_lost,
+      stats_losts_completed,
+      stats_losts_process,
+      stats_founds,
+      stats_founds_completed,
+      stats_founds_process,
+    };
   }
 
   async function getDetailLostFound(id) {

@@ -191,33 +191,29 @@ function asyncDetailLostFound(id) {
 
 function asyncGetStatsDaily(end_date, total_data) {
   return async (dispatch) => {
-    console.log("Executing asyncGetStatsDaily..."); // Add this log to confirm function execution
     dispatch(showLoading());
     try {
       const stats = await api.getStatsDaily({ end_date, total_data });
-      console.log("Daily stats received:", stats); // Check if data is received
       dispatch(getStatsDailyActionCreator(stats));
     } catch (error) {
-      console.error("Error fetching daily stats:", error.message); // Check for errors
       showErrorDialog(error.message);
+    } finally {
+      dispatch(hideLoading());
     }
-    dispatch(hideLoading());
   };
 }
 
 function asyncGetStatsMonthly(end_date, total_data) {
   return async (dispatch) => {
-    console.log("Executing asyncGetStatsMonthly..."); // Add this log to confirm function execution
     dispatch(showLoading());
     try {
       const stats = await api.getStatsMonthly({ end_date, total_data });
-      console.log("Monthly stats received:", stats); // Check if data is received
       dispatch(getStatsMonthlyActionCreator(stats));
     } catch (error) {
-      console.error("Error fetching monthly stats:", error.message); // Check for errors
       showErrorDialog(error.message);
+    } finally {
+      dispatch(hideLoading());
     }
-    dispatch(hideLoading());
   };
 }
 

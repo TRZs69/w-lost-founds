@@ -5,34 +5,31 @@ import {
   asyncGetStatsDaily,
   asyncGetStatsMonthly,
 } from "../states/lostfound/action";
-import LostFoundStats from "../components/LostFoundStats";
+import LostFoundStats from "../components/LostFoundStatsItem";
 
 function LostFoundStatsPage() {
-  const { type } = useParams(); // 'type' will determine if it's daily or monthly
+  const { type } = useParams(); // 'daily' or 'monthly'
+  const dispatch = useDispatch();
+
+  // Define the end_date and total_data for the API call
+  const end_date = "2024-10-07 22:00:00"; // Example end_date
+  const total_data = 7; // Example total_data value
+
   const { statsDaily, statsMonthly } = useSelector((state) => ({
     statsDaily: state.statsDaily,
     statsMonthly: state.statsMonthly,
   }));
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log("Type parameter:", type); // Check if 'type' is coming through correctly
-    if (type === "daily") {
-      console.log("Dispatching asyncGetStatsDaily...", dispatch); // Log dispatch
-      dispatch(asyncGetStatsDaily("2024-10-05 22:00:00", 10)); // Fetch daily stats
-    } else if (type === "monthly") {
-      console.log("Dispatching asyncGetStatsMonthly...", dispatch); // Log dispatch
-      dispatch(asyncGetStatsMonthly("2024-10-05 22:00:00", 5)); // Fetch monthly stats
-    }
-  }, [type, dispatch]);
-
-  // Choose the stats to display based on the 'type' parameter
   const stats = type === "daily" ? statsDaily : statsMonthly;
 
+  // Fetch stats when the component mounts or when the type changes
   useEffect(() => {
-    console.log("Stats data:", stats); // Log the stats to see if they are being updated
-  }, [stats]);
+    if (type === "daily") {
+      dispatch(asyncGetStatsDaily(end_date, total_data));
+    } else if (type === "monthly") {
+      dispatch(asyncGetStatsMonthly(end_date, total_data));
+    }
+  }, [dispatch, type, end_date, total_data]);
 
   return (
     <section>

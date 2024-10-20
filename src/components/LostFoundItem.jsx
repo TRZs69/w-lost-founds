@@ -40,30 +40,33 @@ function LostFoundItem({ lostfound, onDeleteLostFound }) {
             <span className={statusClass}>
               {lostfound.status === "lost" ? "Lost" : "Found"}
             </span>
-            <button
-              type="button"
-              onClick={() => {
-                Swal.fire({
-                  title: "Hapus LostFound",
-                  text: `Apakah kamu yakin ingin menghapus lostfound: ${lostfound.title}?`,
-                  icon: "warning",
-                  showCancelButton: true,
-                  confirmButtonText: "Ya, Tetap Hapus",
-                  customClass: {
-                    confirmButton: "btn btn-danger me-3 mb-4",
-                    cancelButton: "btn btn-secondary mb-4",
-                  },
-                  buttonsStyling: false,
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    onDeleteLostFound(lostfound.id);
-                  }
-                });
-              }}
-              className="btn btn-sm btn-outline-danger ms-3"
-            >
-              <FaTrash /> Hapus
-            </button>
+
+            {lostfound.is_me === 1 && ( // Conditionally render the delete button if is_me is 1
+              <button
+                type="button"
+                onClick={() => {
+                  Swal.fire({
+                    title: "Hapus LostFound",
+                    text: `Apakah kamu yakin ingin menghapus lostfound: ${lostfound.title}?`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Ya, Tetap Hapus",
+                    customClass: {
+                      confirmButton: "btn btn-danger me-3 mb-4",
+                      cancelButton: "btn btn-secondary mb-4",
+                    },
+                    buttonsStyling: false,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      onDeleteLostFound(lostfound.id);
+                    }
+                  });
+                }}
+                className="btn btn-sm btn-outline-danger ms-3"
+              >
+                <FaTrash /> Hapus
+              </button>
+            )}
           </div>
 
           <div className="col-12">
@@ -88,7 +91,7 @@ const lostFoundItemShape = {
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   is_completed: PropTypes.number.isRequired,
-  is_me: PropTypes.number.isRequired,
+  is_me: PropTypes.number,
   cover: PropTypes.string,
   created_at: PropTypes.string.isRequired,
   updated_at: PropTypes.string.isRequired,
