@@ -72,7 +72,7 @@ a {
 
 /* Centering the form and applying styles */
 .form-container {
-  background-color: rgba(224, 233, 239, 0.841);
+  background-color: rgba(200, 221, 235, 0.841);
   padding: 40px;
   max-width: 400px;
   width: 100%;
@@ -80,7 +80,7 @@ a {
 
 .form-container h1 {
   text-align: center;
-  color: #3b8fde;
+  color: #14273d;
   font-size: 1.5rem;
   margin-bottom: 20px;
 }
@@ -129,4 +129,35 @@ a {
 .btn-login:active {
   transform: translateY(0);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container {
+  background-color: #e3e8ef; /* New container color */
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.profile-table {
+  width: 70%; /* Reduce the table width */
+  margin: 0 auto;
+}
+
+.profile-table th,
+.profile-table td {
+  padding: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.rounded-circle {
+  border: 2px solid #3a7bd5;
 }
